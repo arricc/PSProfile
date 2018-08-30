@@ -31,4 +31,5 @@ Function Install-PSProfile {
     Copy-Item ($path + "\PSProfile-master\*") $dest -recurse
  
     Remove-Item $path -Force -Recurse
+    Write-Output ("PSProfile updated. Please restart PowerShell CLI for latest changes")
 }
