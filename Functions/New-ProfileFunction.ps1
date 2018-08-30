@@ -17,7 +17,7 @@ Function $Name
 {
     [CmdletBinding()]
     Param(
-        [Parameter(Mandatory=$True)]
+        [Parameter(Mandatory=`$True)]
         [string]`$param
     )
 
