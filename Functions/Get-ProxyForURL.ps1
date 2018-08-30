@@ -1,4 +1,5 @@
-function Get-ProxyForURL {
+#Can't work out any other good way to do this when using a WPAD or Autodetect proxy.
+Function Get-ProxyForURL {
     param (
         [Parameter(Mandatory)]
         [string]$URL

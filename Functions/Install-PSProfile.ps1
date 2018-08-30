@@ -8,14 +8,12 @@ Function Install-PSProfile {
     $URL = "https://github.com/arricc/PSProfile/archive/master.zip" 
 
 
-    $null = md $path -Force
-    Get-ChildItem -Path  $dest  -exclude "Transcripts","LocalProfile.ps1" | foreach ($_) {
+    $null = mkdir $path -Force
+    Get-ChildItem -Path  $dest  -exclude "Transcripts","LocalProfile.ps1" | ForEach-Object ($_) {
         Remove-Item $_.fullname -Force -Recurse
     }
-    $null = md $dest -Force
+    $null = mkdir $dest -Force
 
-    $pieces = $url.Split("/")
-    $fileName = $pieces[$pieces.Count-1]
     $zip = "$path\arricc-PSProfile.zip"
 
     $SysProxy = [System.Net.WebRequest]::GetSystemWebProxy().GetProxy($url) 
@@ -32,5 +30,5 @@ Function Install-PSProfile {
  
     Copy-Item ($path + "\PSProfile-master\*") $dest -recurse
  
-    rm $path -Force -Recurse
+    Remove-Item $path -Force -Recurse
 }
