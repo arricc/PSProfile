@@ -29,7 +29,9 @@ Function $Name
     New-Item -Path $NewPath -Name ($Name + ".ps1") -ItemType File -Value $Content
     
     If ($EditNow) {
-        vi $NewFile
+        #This will be swapped to vi after I upgrade my Win10 version
+        #vi $NewFile
+        notepad $NewFile
     }
 
 }
