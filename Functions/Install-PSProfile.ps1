@@ -4,7 +4,7 @@
 Function Install-PSProfile {
 
     $path = ($env:TEMP + "\PSProfile")
-    $dest = $env:USERPROFILE + "\Documents\WindowsPowerShell2"
+    $dest = $env:USERPROFILE + "\Documents\WindowsPowerShell"
     $URL = "https://github.com/arricc/PSProfile/archive/master.zip" 
 
 
