@@ -1,4 +1,7 @@
 <#
+
+.EXAMPLE
+
 .SYNOPSIS 
 These are the main PowerShell Script I've started using for my local PowerShell profile
 
@@ -14,7 +17,7 @@ $ProxySettings = New-PSSessionOption -ProxyAccessType IEConfig
 
 If($Host.UI.RawUI.WindowTitle -like "*administrator*")
 {
-	Write-ASCII "Administrator" -Fore Green
+	Write-ASCII "Administrator" -ForegroundColor Red -BackgroundColor Black
     $IsAdministrator = $true
 }
 

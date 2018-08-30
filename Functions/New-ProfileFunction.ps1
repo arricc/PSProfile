@@ -3,7 +3,7 @@
     Param(
         [Parameter(Mandatory=$True)]
         [string]$Name,
-        [switch]$EditNow
+        [switch]$NoEdit
     )
 
     $NewPath = $env:USERPROFILE + "\Documents\WindowsPowerShell\Functions\" 
@@ -28,7 +28,7 @@ Function $Name
 
     New-Item -Path $NewPath -Name ($Name + ".ps1") -ItemType File -Value $Content
     
-    If ($EditNow) {
+    If (!$NoEdit) {
         #This will be swapped to vi after I upgrade my Win10 version
         #vi $NewFile
         notepad $NewFile
