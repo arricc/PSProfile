@@ -2,8 +2,9 @@
     $origLastExitCode = $LastExitCode
     Write-VcsStatus
 
-    Write-Host "$env:USERNAME@" -NoNewline -ForegroundColor DarkYellow
-    Write-Host "$env:COMPUTERNAME" -NoNewline -ForegroundColor Magenta
+    Write-Host "$env:USERNAME" -NoNewline -ForegroundColor Green
+    Write-Host "@" -NoNewline #-ForegroundColor Green
+    Write-Host "$env:COMPUTERNAME" -NoNewline -ForegroundColor Green
     Write-Host " : " -NoNewline -ForegroundColor DarkGray
 
     $curPath = $ExecutionContext.SessionState.Path.CurrentLocation.Path

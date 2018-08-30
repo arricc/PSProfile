@@ -12,18 +12,20 @@ If($Host.UI.RawUI.WindowTitle -like "*administrator*")
 $MyModules = @()
 $MyModules += "posh-git"
 $MyModules += "Get-ChildItemColor"
-$MyModules += "Oh-My-Posh"
+#$MyModules += "Oh-My-Posh"
 
-$MyModules | % {if (!(get-module $_ -ListAvailable)) 
+
+$MyModules | % {if (!(Import-Module $_ -ErrorAction SilentlyContinue -PassThru )) 
     { 
         if ($IsAdministrator) { 
             install-module $_ -Force  
         } else {
             install-module $_ -Force -Scope CurrentUser
         }
+        Import-Module $_
     }
 }
-$MyModules | % {Import-Module $_ } 
+
 
 $MyModules = (get-childitem ($env:USERPROFILE + "\Documents\WindowsPowerShell\Modules") )
 $MyModules | % { Import-Module $_ } 
@@ -41,13 +43,9 @@ ForEach ($function in $functions)
 
 
 
-
-
-
 $global:GitPromptSettings.BeforeText = '['
 $global:GitPromptSettings.AfterText  = '] '
-
-
+ 
 
 ##Aliases
 
@@ -58,7 +56,7 @@ Set-Alias grep Search-TextFile
 
 
 ##Set Theme
-#Set-Theme Agnoster
+
 
 
 ##Transcription
@@ -67,6 +65,10 @@ $TranscriptPath = ($env:USERPROFILE + "\Documents\WindowsPowerShell\Transcripts\
 
 $tLoc = New-Item -ItemType Directory -Force -Path $TranscriptPath  
 
+if (Test-Path ($env:USERPROFILE + "\Documents\WindowsPowerShell\LocalProfile.ps1")) {
+    write-host "Local Profile extras being imported.." -ForegroundColor Yellow
+    . ($env:USERPROFILE + "\Documents\WindowsPowerShell\LocalProfile.ps1")
+}
 
 write-ascii "Transcript logging..." -Fore Green
 write-host ""

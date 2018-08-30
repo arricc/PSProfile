@@ -1,1 +1,3 @@
 Transcripts/*.txt
+LocalProfile.ps1
+Modules/PoShFuck/StaticDict.xml
