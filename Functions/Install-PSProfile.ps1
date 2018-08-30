@@ -1,31 +1,36 @@
 ##
 ## Install or update the profile
 ##
+Function Install-PSProfile {
 
-$path = ($env:TEMP + "\PSProfile")`
-$dest = $env:USERPROFILE + "\Documents\WindowsPowerShell"`
-$URL = "https://github.com/arricc/PSProfile/archive/master.zip" 
+    $path = ($env:TEMP + "\PSProfile")
+    $dest = $env:USERPROFILE + "\Documents\WindowsPowerShell"
+    $URL = "https://github.com/arricc/PSProfile/archive/master.zip" 
 
 
-md $path 
-Remove-Item $dest\* -Force -
-md $dest
+    $null = md $path -Force
+    Get-ChildItem -Path  $dest  -exclude "Transcripts","LocalProfile.ps1" | foreach ($_) {
+        Remove-Item $_.fullname -Force -Recurse
+    }
+    $null = md $dest -Force
 
-$pieces = $url.Split("/")
-$fileName = $pieces[$pieces.Count-1]
-$unzipped = "$path\$fileName"
+    $pieces = $url.Split("/")
+    $fileName = $pieces[$pieces.Count-1]
+    $zip = "$path\arricc-PSProfile.zip"
 
-[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-$SysProxy = [System.Net.WebRequest]::GetSystemWebProxy().GetProxy($url) 
+    $SysProxy = [System.Net.WebRequest]::GetSystemWebProxy().GetProxy($url) 
+    if ($SysProxy.OriginalString -eq $URL) {
+        Invoke-WebRequest -Uri $URL -OutFile $zip
+    } else {
+        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+        Invoke-WebRequest -Uri $URL -Proxy ($SysProxy.OriginalString) -OutFile $zip
+    }
 
-Invoke-WebRequest -Uri $URL  -Proxy ($SysProxy.OriginalString) -OutFile $unzipped
-
-$shellApp = New-Object -com shell.application 
-$destination = $shellApp.namespace($path) 
-$destination.Copyhere($shellApp.namespace($unzipped).items())
+    $shellApp = New-Object -com shell.application 
+    $destination = $shellApp.namespace($path) 
+    $destination.Copyhere($shellApp.namespace($zip).items())
  
-Copy-Item ($path + "\PSProfile-master\*") $env:USERPROFILE -recurse
+    Copy-Item ($path + "\PSProfile-master\*") $dest -recurse
  
-Get-ChildItem -Path  $dest  -exclude "Transcripts" | foreach ($_) {
-    Remove-Item $_.fullname -Force -Recurse
+    rm $path -Force -Recurse
 }
