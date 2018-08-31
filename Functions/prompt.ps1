@@ -19,4 +19,14 @@
     $LastExitCode = $origLastExitCode
 #    Write-Host $curPath -NoNewline -ForegroundColor Yellow
     if ($IsAdministrator) { return " # " } else { return " $ "}
+<#
+.SYNOPSIS
+Defines the structure of the PowerShell CLI prompt.
+.DESCRIPTION
+Sets the contents and colour of the prompt.
+.INPUTS
+None.
+.OUTPUTS
+Returns a string representing prompt.
+#>
 }

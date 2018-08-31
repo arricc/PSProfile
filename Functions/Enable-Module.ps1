@@ -1,9 +1,9 @@
-Function Load-Module
+Function Enable-Module
 {
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory=$True,ValueFromPipeline=$true)]
-        [string[]]$Module
+        [string]$Module
     )
 
     Process {
@@ -16,5 +16,18 @@ Function Load-Module
             $null = Import-Module $_ -PassThru -InformationAction Ignore 
         }
     }
+<#
+.SYNOPSIS
+Installs and imports a module.
+.DESCRIPTION
+Imports a module if it is installed, otherwise installs if off PSGallery or any other repository configured locally.
+Installs in global scope if the user is an administrator, otherwise, CurrentUser.
+.INPUTS
+Accepts a pipeline list of modules
+.OUTPUTS
+None.
+.PARAMETER Module
+The module to enable
 
+#>
 }

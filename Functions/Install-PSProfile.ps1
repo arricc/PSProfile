@@ -28,8 +28,22 @@ Function Install-PSProfile {
     $destination = $shellApp.namespace($path) 
     $destination.Copyhere($shellApp.namespace($zip).items())
  
-    Copy-Item ($path + "\PSProfile-master\*") $dest -recurse
+    Copy-Item ($path + "\PSProfile-master\*") $dest -recurse -Filter ".gitignore"
  
     Remove-Item $path -Force -Recurse
     Write-Output ("PSProfile updated. Please restart PowerShell CLI for latest changes")
+<#
+.SYNOPSIS
+Installs or updates the PSProfile bundle.
+.DESCRIPTION
+** This is currently a destructive operation and will wipe your existing Profile directory entirely. 
+** This includes and user specific modules.
+
+Automatically downloads and unpacks the latest PSProfile bundle to your local PowerShell CLI profile.
+
+.INPUTS
+None.
+.OUTPUTS
+None.
+#>
 }

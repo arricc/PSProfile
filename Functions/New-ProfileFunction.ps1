@@ -22,7 +22,21 @@ Function $Name
     )
 
     Write-Output ("Param: " + `$param)
-
+<#
+.SYNOPSIS
+Short description of the function
+.DESCRIPTION
+Longer description of the function
+.INPUTS
+Any inputes
+.OUTPUTS
+Any outputs
+.PARAMETER param
+param description
+.EXAMPLE
+$Name -param  "string1"
+Param: string1
+#>
 }
 "@
 
@@ -33,5 +47,21 @@ Function $Name
         #vi $NewFile
         notepad $NewFile
     }
-
+<#
+.SYNOPSIS
+Creates a new function to be auto imported in your the PS CLI Profile
+.DESCRIPTION
+Creates a template file based on the Name parameter, and opens an editor.
+This is then auto-imported next time PowerShell CLI is started.
+.INPUTS
+None.
+.OUTPUTS
+None.
+.PARAMETER Name
+The name of the new function to create
+.PARAMETER NoEdit
+Switch. If set, the editor will not be started.
+.EXAMPLE
+New-ProfileFunction -Name Get-JellyBeans
+#>
 }
