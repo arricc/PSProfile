@@ -5,6 +5,8 @@ With thanks to:
 * [@KennyLowe](https://twitter.com/KennyLowe) ([GitHub](https://github.com/KennyLowe/PProfile)) for the intial inspiration and some of the function code.
 
 * [u/PowerShellStunnah](https://www.reddit.com/user/PowerShellStunnah) - included version of [Get-Excuse](https://www.reddit.com/r/PowerShell/comments/2x8n3y/getexcuse/coz53xa/)
+* [Matt Parkes](https://github.com/mattparkes) - [PoShFuck Module](https://github.com/mattparkes/PoShFuck)
+* Svendsen Tech Write-ASCII Module from [PowerShellAdmin](https://www.powershelladmin.com/wiki/Ascii_art_characters_powershell_script)
 
 
 # Install/Update
