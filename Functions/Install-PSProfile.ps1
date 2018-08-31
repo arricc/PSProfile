@@ -28,7 +28,7 @@ Function Install-PSProfile {
     $destination = $shellApp.namespace($path) 
     $destination.Copyhere($shellApp.namespace($zip).items())
  
-    Copy-Item ($path + "\PSProfile-master\*") $dest -recurse -Filter ".gitignore"
+    Copy-Item ($path + "\PSProfile-master\*") $dest -recurse -Exclude ".gitignore"
  
     Remove-Item $path -Force -Recurse
     Write-Output ("PSProfile updated. Please restart PowerShell CLI for latest changes")
