@@ -36,7 +36,7 @@ $MyModules += "posh-git"
 $MyModules += "Get-ChildItemColor"
 #$MyModules += "Oh-My-Posh"
 
-$MyModules | Load-Module
+$MyModules | Enable-Module
 
 #Shouldn't need to explicitly load these
 #$MyModules = (get-childitem ($env:USERPROFILE + "\Documents\WindowsPowerShell\Modules") )
