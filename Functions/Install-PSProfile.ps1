@@ -17,10 +17,10 @@ Function Install-PSProfile {
     $zip = "$path\arricc-PSProfile.zip"
 
     $SysProxy = [System.Net.WebRequest]::GetSystemWebProxy().GetProxy($url) 
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
     if ($SysProxy.OriginalString -eq $URL) {
         Invoke-WebRequest -Uri $URL -OutFile $zip
     } else {
-        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
         Invoke-WebRequest -Uri $URL -Proxy ($SysProxy.OriginalString) -OutFile $zip
     }
 
