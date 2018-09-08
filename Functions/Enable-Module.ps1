@@ -5,15 +5,27 @@ Function Enable-Module
         [Parameter(Mandatory=$True,ValueFromPipeline=$true)]
         [string]$Module
     )
+    Begin {
+        ##Force install of NuGet Provider if it doesn't exist or is too old..
+        $NugetVer = (Get-PackageProvider -name NuGet ).Version
+        if ($NugetVer -lt $NugetMinVersion) {
+            Write-Host "Updating NuGet"
+            Install-PackageProvider -Name NuGet -MinimumVersion $NugetMinVersion -Force
+        } else {
+            Write-Host "Nuget meets version requirement " $NugetVer ">=" $NugetMinVersion
+        }
+    }
 
     Process {
-        if (!($null = Import-Module $Module -ErrorAction SilentlyContinue -PassThru ))   { 
+        Write-Host "Enabling Module: " $Module
+        if (!($mod = Import-Module $Module -ErrorAction SilentlyContinue -PassThru ))   {
+            Write-Host "Installing Module: " $Module
             if ($IsAdministrator) { 
                 install-module $_ -Force  
             } else {
                 install-module $_ -Force -Scope CurrentUser
             }
-            $null = Import-Module $_ -PassThru -InformationAction Ignore 
+            $mod = Import-Module $_ -PassThru -InformationAction Ignore
         }
     }
 <#

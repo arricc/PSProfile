@@ -13,16 +13,16 @@ https://github.com/arricc/PSProfile
 #>
 
 $ProxySettings = New-PSSessionOption -ProxyAccessType IEConfig
-
+$NugetMinVersion = "2.8.5.201"
 
 If($Host.UI.RawUI.WindowTitle -like "*administrator*")
 {
 	Write-ASCII "Administrator" -ForegroundColor Red -BackgroundColor Black
     $IsAdministrator = $true
 }
-
 #Load my functions
 $functions = Get-ChildItem -Path ($env:USERPROFILE + "\Documents\WindowsPowerShell\Functions") -Filter '*.ps1' 
+
 ForEach ($function in $functions)
 {
     Write-host "  Importing $($function.BaseName)" -ForegroundColor Green
@@ -66,8 +66,9 @@ if (Test-Path ($env:USERPROFILE + "\Documents\WindowsPowerShell\LocalProfile.ps1
     . ($env:USERPROFILE + "\Documents\WindowsPowerShell\LocalProfile.ps1")
 }
 
-write-ascii "Transcript logging..." -Fore Green
-write-host ""
+#write-ascii "Transcript logging..." -Fore Green
+Write-Host "Transcript logging..." -ForegroundColor DarkGreen
+Write-Host ""
 $Transcript = Start-Transcript -OutputDirectory $TranscriptPath
-write-host $Transcript -ForegroundColor "Green"
-write-host ""
+Write-Host $Transcript -ForegroundColor DarkGreen
+Write-Host ""
