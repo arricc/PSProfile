@@ -10,7 +10,7 @@ With thanks to:
 * [Matt Parkes](https://github.com/mattparkes) - [PoShFuck Module](https://github.com/mattparkes/PoShFuck)
 * Svendsen Tech Write-ASCII Module from [PowerShellAdmin](https://www.powershelladmin.com/wiki/Ascii_art_characters_powershell_script)
 
-## Install/Update
+## Install
 
 ### **WARNING**
 
@@ -30,6 +30,15 @@ $InstallFunc = "https://raw.githubusercontent.com/arricc/PSProfile/master/Functi
 iex ((New-Object System.Net.WebClient).DownloadString($InstallFunc))
 Install-PSProfile
 
+~~~~
+
+## Updating
+
+To update simply run ````Install-PSProfile```` if you get an error relating to  secure connectivity, try this:
+
+~~~~powershell
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+Install-PSProfile
 ~~~~
 
 ### Execution Policy
