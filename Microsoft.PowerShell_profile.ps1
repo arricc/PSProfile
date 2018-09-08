@@ -25,11 +25,11 @@ $functions = Get-ChildItem -Path ($env:USERPROFILE + "\Documents\WindowsPowerShe
 
 ForEach ($function in $functions)
 {
-    Write-host "  Importing $($function.BaseName)" -ForegroundColor Green
+    Write-host "  Importing local function: $($function.BaseName)" -ForegroundColor Green
     . $function.PSPath
 }
 
-
+Import-Module Arricc.PSProfile 
 
 $MyModules = @()
 $MyModules += "posh-git"
