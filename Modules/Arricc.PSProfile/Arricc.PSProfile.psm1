@@ -17,5 +17,11 @@ ForEach ($folder in $functionFolders)
         }
     }
 }
-$publicFunctions = (Get-ChildItem -Path "$PSScriptRoot\public" -Filter '*.ps1').BaseName
+$publicFunctions = @()
+$publicFunctions += (Get-ChildItem -Path "$PSScriptRoot\ActiveDirectory" -Filter '*.ps1').BaseName
+$publicFunctions += (Get-ChildItem -Path "$PSScriptRoot\Docker" -Filter '*.ps1').BaseName
+$publicFunctions += (Get-ChildItem -Path "$PSScriptRoot\Exchange" -Filter '*.ps1').BaseName
+$publicFunctions += (Get-ChildItem -Path "$PSScriptRoot\Misc" -Filter '*.ps1').BaseName
+$publicFunctions += (Get-ChildItem -Path "$PSScriptRoot\PSProfile" -Filter '*.ps1').BaseName
+
 Export-ModuleMember -Function $publicFunctions
